@@ -1,6 +1,11 @@
 import { useState } from "react";
 function Registration() {
   const [name, setName] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   const handleInputChange = (event) => {
     const target = event.target.value;
@@ -9,7 +14,8 @@ function Registration() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`Registration as user: ${name} is complete`);
+    return name;
+    // alert(`Registration as user: ${name} is complete`);
   };
 
   return (
@@ -26,7 +32,19 @@ function Registration() {
             onChange={handleInputChange}
           />
         </label>
-        <input type="submit" value={"Register"} />
+        <label>
+          Member:
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
+        </label>
+        <p>
+          {name.length > 0 ? name + " - " : null}
+          {isChecked ? "member" : "not"}
+        </p>
+        <input name="inpSubmit" type="submit" value={"Register"} />
       </form>
     </>
   );
